@@ -1,0 +1,7 @@
+---
+- name: install ops tools
+  yum: pkg={{ item }} state=present
+  with_items:
+    - "{{ ops_tools_yum_pkgs }}"
+  become: True
+

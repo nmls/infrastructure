@@ -1,0 +1,17 @@
+---
+- name: if env is not defined the default it to dev
+  set_fact:
+    env: 'dev'
+  when: env is not defined
+
+- name: check if file with vars for the environment exist
+  local_action:
+    module: stat
+    path: "{{ playbook_dir }}/vars/envs/{{ env }}/vars.yml"
+  register: s
+
+- name: load the vars for the environment
+  include_vars:
+    file: "{{ playbook_dir }}/vars/envs/{{ env }}/vars.yml"
+  when: s.stat.exists == True
+

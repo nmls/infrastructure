@@ -1,0 +1,7 @@
+---
+- name: install ops tools
+  hosts: all
+  roles:
+    - init-vars
+    - ops-tools
+
