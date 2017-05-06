@@ -1,0 +1,8 @@
+---
+- name: install sudo
+  yum: name=sudo state=present
+- name: create group admin
+  group: name=admin state=present
+- name: grant group admin sudo privileges without password
+  copy: src=11-group-admin dest=/etc/sudoers.d/11-group-admin
+
