@@ -1,6 +1,10 @@
 ---
-- name: install ops tools
-  hosts: all
+- hosts: all
+  pre_tasks:
+    - name: stop if comment parameter isn't passed
+      fail:
+        msg: "The comment parameter is required."
+      when: comment is not defined
   roles:
     - init-vars
     - ops-tools
