@@ -3,5 +3,5 @@
   roles:
     - load-vars
     - epel
-    - ops-tools
+    - infra-tools
 

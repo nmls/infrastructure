@@ -1,0 +1,3 @@
+---
+- name: install epel-release
+  yum: pkg=epel-release state=present
