@@ -1,0 +1,13 @@
+---
+- name: create www-data group
+  group: name=www-data state=present system=yes
+
+- name: create www-data user
+  user: name=www-data group=www-data home=/var/www createhome=no shell=/bin/false
+
+- name: install nginx
+  yum: pkg=nginx state=present
+
+- name: start service nginx
+  service: enabled=yes name=nginx state=started
+  tags: service
