@@ -1,0 +1,10 @@
+---
+infra_tools_yum_pkgs:
+  - python
+  - python-pip
+  - python-devel
+  - openssl-devel
+
+infra_tools_pip_pkgs:
+  - ansible
+  - testinfra

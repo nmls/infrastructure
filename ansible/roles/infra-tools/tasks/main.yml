@@ -1,0 +1,15 @@
+---
+- name: install infra tools (yum packages)
+  yum: pkg={{ item }} state=present
+  with_items:
+    - "{{ infra_tools_yum_pkgs }}"
+  become: True
+
+- name: update pip
+  command: pip install pip --upgrade
+
+- name: install infra tools (pip packages)
+  pip: name={{ item }} state=present
+  with_items:
+    - "{{ infra_tools_pip_pkgs }}"
+  become: True
