@@ -19,3 +19,12 @@ variable "public_domain" {
 variable "internal_domain" {
   default = "eu-west-2.aws.laatu.internal"
 }
+variable "vpc_cidr" {
+  default = "172.31.0.0/16"
+}
+variable "subnet_a_cidr" {
+  default = "172.31.0.0/20"
+}
+variable "subnet_b_cidr" {
+  default = "172.31.16.0/20"
+}
