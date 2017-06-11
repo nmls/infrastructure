@@ -6,5 +6,5 @@ variable "subnet_b_cidr" {
 }
 variable "aws_region" {
 }
-variable "name" {
+variable "env" {
 }

@@ -16,7 +16,7 @@ variable "env_full" {
 variable "public_domain" {
   default = "eu-west-2.aws.laatu.io"
 }
-variable "internal_domain" {
+variable "private_domain" {
   default = "eu-west-2.aws.laatu.internal"
 }
 variable "vpc_cidr" {

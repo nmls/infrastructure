@@ -2,7 +2,7 @@ resource "aws_vpc" "vpc" {
   cidr_block = "${var.vpc_cidr}"
   enable_dns_hostnames = "true"
   tags {
-    Name = "${var.name}"
+    Name = "${var.env}"
   }
 }
 
@@ -12,7 +12,7 @@ resource "aws_subnet" "subnet_a" {
   map_public_ip_on_launch = true
   availability_zone = "${var.aws_region}a"
   tags {
-    Name = "${var.name}_a"
+    Name = "${var.env}_a"
   }
 }
 
@@ -22,7 +22,7 @@ resource "aws_subnet" "subnet_b" {
   map_public_ip_on_launch = true
   availability_zone = "${var.aws_region}b"
   tags {
-    Name = "${var.name}_b"
+    Name = "${var.env}_b"
   }
 }
 
