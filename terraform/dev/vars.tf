@@ -28,3 +28,6 @@ variable "subnet_a_cidr" {
 variable "subnet_b_cidr" {
   default = "172.31.16.0/20"
 }
+variable "access_ip_ranges" {
+  default = ["0.0.0.0/0"]
+}

@@ -20,3 +20,10 @@ module "vpc" {
   subnet_a_cidr = "${var.subnet_a_cidr}"
   subnet_b_cidr = "${var.subnet_b_cidr}"
 }
+
+module "security_groups" {
+  source = "../../modules/security_groups"
+  access_ip_ranges = "${var.access_ip_ranges}"
+  vpc_id = "${module.vpc.vpc_id}"
+}
+
