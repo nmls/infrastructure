@@ -7,11 +7,11 @@
 - name: check if file with vars for the environment exist
   local_action:
     module: stat
-    path: "{{ playbook_dir }}/vars/envs/{{ env }}/vars.yml"
+    path: "{{ playbook_dir }}/vars/{{ env }}/vars.yml"
   register: s
 
 - name: load the vars for the environment
   include_vars:
-    file: "{{ playbook_dir }}/vars/envs/{{ env }}/vars.yml"
+    file: "{{ playbook_dir }}/vars/{{ env }}/vars.yml"
   when: s.stat.exists == True
 
