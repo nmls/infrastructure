@@ -13,3 +13,32 @@
   with_items:
     - "{{ infra_tools_pip_pkgs }}"
   become: True
+
+- name: check if terraform is installed
+  shell: "whereis terraform | cut -d: -f2 | awk '{ print $1 }'"
+  register: tf_check
+
+- name: get terraform version if installed
+  shell: "terraform -v | head -n 1 | awk '{ print $2 }'"
+  when: tf_check.stdout != ""
+  register: tf_version
+
+- debug:
+    var: tf_version
+
+- debug:
+    var: terraform_version
+
+- name: download and unpack terraform
+  unarchive:
+    src: "{{ 'https://releases.hashicorp.com/terraform/'+terraform_version+'/terraform_'+terraform_version+'_linux_amd64.zip' }}"
+    dest: /tmp/
+    remote_src: yes
+  when: tf_check.stdout == "" or tf_version.stdout != 'v'+terraform_version
+
+- name: install terraform binary
+  copy:
+    src: /tmp/terraform
+    dest: /usr/local/bin/terraform
+    mode: 0755
+  when: tf_check.stdout == "" or tf_version.stdout != 'v'+terraform_version 
