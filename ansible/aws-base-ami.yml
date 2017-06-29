@@ -1,0 +1,43 @@
+---
+- name: create ec2 instance
+  hosts: localhost
+  vars:
+    ec2_instance_name: "build-base"
+  roles:
+    - role: load-vars
+    - role: aws-s3-tf-state-lookup-build
+    - role: aws-ec2-start-instance
+
+- name: provision the ec2 instance
+  hosts: ec2_instance
+  become: yes
+  roles:
+    - role: load-vars
+    - role: epel
+    - role: ops-tools
+    - role: sudo-group-admin
+
+  post_tasks:
+    - name: remove the key
+      file:
+        state: absent
+        path: "{{ item }}"
+      with_items:
+        - "/root/.ssh/authorized_keys"
+        - "/home/centos/.ssh/authorized_keys"
+
+- name: snapshot the instance into ami
+  hosts: localhost
+
+  vars:
+    ec2_instance_id: "{{ hostvars['localhost']['ec2_instance_id'] }}"
+    aws_build_subnet: "{{ hostvars['localhost']['aws_build_subnet'] }}"
+
+  pre_tasks:
+    - name: set ami name
+      set_fact:
+        ec2_ami_name: "base-{{ ansible_date_time.date }}{{ ansible_date_time.time | replace(':','') }}"
+
+  roles:
+  - role: aws-ec2-instance-to-ami
+

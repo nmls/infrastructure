@@ -7,7 +7,7 @@
     region: "{{ aws_region }}"
   register: tf
 
-- name: set build_subnet
+- name: set aws_build_subnet
   set_fact:
     aws_build_subnet: "{{ tf.result }}"
 
@@ -19,7 +19,7 @@
     region: "{{ aws_region }}"
   register: tf
 
-- name: set build_sg
+- name: set aws_build_sg
   set_fact:
     aws_build_sg: "{{ tf.result }}"
 
