@@ -8,7 +8,7 @@
     keypair: "{{ env }}"
     instance_type: t2.micro
     group_id: "{{ aws_build_sg }}"
-    image: ami-e05a4d84
+    image: "{{ aws_ec2_instance_ami }}"
     zone: "{{ aws_region }}a"
     assign_public_ip: true
     vpc_subnet_id: "{{ aws_build_subnet }}"

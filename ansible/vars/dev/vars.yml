@@ -5,4 +5,4 @@ terraform:
   s3_build_subnet_tf_key: "aws_subnet.subnet_a.id"
   s3_build_sg_tf_key: "aws_security_group.build.id"
 aws_region: "eu-west-2"
-
+aws_ec2_instance_ami: "ami-e05a4d84"

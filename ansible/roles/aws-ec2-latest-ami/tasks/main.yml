@@ -1,0 +1,15 @@
+---
+- name: get latest ami
+  ec2_ami_find:
+    name: "{{ ami_pattern }}"
+    region: "{{ aws_region }}"
+    sort: name
+    sort_order: descending
+    sort_end: 1
+    owner: self
+  register: ami
+
+- name: set ami
+  set_fact:
+    aws_ec2_instance_ami: "{{ ami.results[0].ami_id }}"
+

@@ -36,7 +36,7 @@
   pre_tasks:
     - name: set ami name
       set_fact:
-        ec2_ami_name: "base-{{ ansible_date_time.date }}{{ ansible_date_time.time | replace(':','') }}"
+        ec2_ami_name: "base-{{ ansible_date_time.date | replace('-', '') }}{{ ansible_date_time.time | replace(':','') }}"
 
   roles:
   - role: aws-ec2-instance-to-ami
