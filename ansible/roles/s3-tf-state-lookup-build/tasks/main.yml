@@ -1,0 +1,25 @@
+---
+- name: look up terraform state file for build subnet
+  s3_tf_state_lookup:
+    bucket: "{{ terraform.s3_bucket }}"
+    bucket_key: "{{ terraform.s3_bastion_key }}"
+    tf_key: "{{ terraform.s3_build_subnet_tf_key }}"
+    region: "{{ aws_region }}"
+  register: tf
+
+- name: set build_subnet
+  set_fact:
+    aws_build_subnet: "{{ tf.result }}"
+
+- name: look up terraform form file for security group
+  s3_tf_state_lookup:
+    bucket: "{{ terraform.s3_bucket }}"
+    bucket_key: "{{ terraform.s3_bastion_key }}"
+    tf_key: "{{ terraform.s3_build_sg_tf_key }}"
+    region: "{{ aws_region }}"
+  register: tf
+
+- name: set build_sg
+  set_fact:
+    aws_build_sg: "{{ tf.result }}"
+

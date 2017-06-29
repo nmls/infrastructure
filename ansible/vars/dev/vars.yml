@@ -1,0 +1,8 @@
+---
+terraform:
+  s3_bucket: "laatu-jordgubbe-terraform-eu-west-2-dev"
+  s3_bastion_key: "bastion/terraform.tfstate"
+  s3_build_subnet_tf_key: "aws_subnet.subnet_a.id"
+  s3_build_sg_tf_key: "aws_security_group.build.id"
+aws_region: "us-east-2"
+

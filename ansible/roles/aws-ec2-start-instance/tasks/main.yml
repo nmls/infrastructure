@@ -1,0 +1,10 @@
+---
+#- name: start ec2 instance
+#  local_action:
+#    module: ec2
+#    keypair: "{{ env }}"
+#    instance_type: ""
+#    group_id:
+#    ...
+#  register: ec2
+#  when: ec2_instance_profile.iam_role = false
