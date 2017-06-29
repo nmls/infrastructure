@@ -1,0 +1,38 @@
+---
+- name: create ec2 instance
+  hosts: localhost
+  vars:
+    ec2_instance_name: "{{ server }}-build"
+
+  pre_tasks:
+    - name: check if server playbook exists
+      stat:
+        path: "{{ server }}.yml"
+      register: st
+
+    - name: fail if playbook doesn't exist
+      fail:
+        msg: "playbook {{ server }}.yml does not exist"
+      when: st.stat.exists == False
+
+  roles:
+    - role: load-vars
+    - role: aws-s3-tf-state-lookup-build
+    - { role: aws-ec2-latest-ami, ami_pattern: "base-*" }
+    - role: aws-ec2-start-instance
+
+- name: turn ec2 instance to ami
+  hosts: localhost
+
+  vars:
+    ec2_instance_id: "{{ hostvars['localhost']['ec2_instance_id'] }}"
+    aws_build_subnet: "{{ hostvars['localhost']['aws_build_subnet'] }}"
+
+  pre_tasks:
+    - name: set ami name
+      set_fact:
+        ec2_ami_name: "{{ server }}-{{ ansible_date_time.date | replace('-', '') }}{{ ansible_date_time.time | replace(':','') }}"
+
+  roles:
+    - role: aws-ec2-instance-to-ami
+
