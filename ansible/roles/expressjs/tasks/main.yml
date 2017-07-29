@@ -1,0 +1,10 @@
+---
+- name: install expressjs
+  npm:
+    name: "{{ item }}"
+    global: yes
+    state: latest
+  become: yes
+  with_items:
+    - expressjs
+    - express-generator

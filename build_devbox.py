@@ -17,7 +17,7 @@ if target_host == "localhost":
 else:
   connection_local = ''
 
-command = 'ansible-playbook -i "'+target_host+',"'+connection_local+' ansible/play-devbox.yml -e comment="'+comment+'"'
+command = 'ansible-playbook -i "'+target_host+',"'+connection_local+' ansible/devbox.yml -e comment="'+comment+'"'
 
 rc = os.system(command)
 if rc != 0:

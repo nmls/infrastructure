@@ -1,0 +1,9 @@
+---
+- hosts: all
+  roles:
+    - load-vars
+    - epel
+    - ops-tools
+    - infra-tools
+    - nodejs
+    - expressjs
