@@ -1,0 +1,6 @@
+---
+- hosts: all
+  roles:
+    - load-vars
+    - dot-files
+

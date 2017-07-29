@@ -1,0 +1,10 @@
+---
+- name: install tmux.conf
+  get_url:
+    url: "https://raw.githubusercontent.com/nmls/dot-files/master/{{ item }}"
+    dest: "~/{{ item }}"
+    mode: 0440
+  with_items:
+    - ".tmux.conf"
+    - ".gitconfig"
+    - ".screenrc" 
