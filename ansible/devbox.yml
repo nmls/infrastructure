@@ -7,3 +7,4 @@
     - infra-tools
     - nodejs
     - expressjs
+    - mongodb

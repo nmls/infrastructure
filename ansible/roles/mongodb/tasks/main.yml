@@ -1,0 +1,20 @@
+---
+- name: create mongodb yum repository
+  template:
+    dest: /etc/yum.repos.d/mongodb-org-3.4.repo
+    src: mongodb.repo.j2
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+- name: install mongodb
+  yum: name=mongodb-org state=latest
+  become: yes
+#- name: add port to selinux
+#  shell: "semanage port -a -t mongod_port_t -p tcp 27017 && touch /tmp/selinux-mongodb"
+#  args:
+#    creates: /tmp/selinux-mongodb
+- name: start mongodb service
+  service:
+    name: mongod
+    state: started
